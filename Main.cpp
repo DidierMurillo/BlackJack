@@ -5,6 +5,12 @@
 #include "Baraja.h"
 #include "Carta.h"
 #include <curses.h>
+#include <string>
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+
 void crearMapaCorazon(char ,int);
 void crearMapaEspada(char ,int);
 void crearMapaDiamante(char ,int);
@@ -13,64 +19,70 @@ void imprimirCarta(int, char, char[20][27] = NULL);
 
 void cleanScreen();
 int main(){
+
 	initscr();
 	start_color();
 	char Opcion[1];
 	char Apuesta[1];
 	Jugador* TemporalJugador=new Jugador("Juana","18","1234","Mexico","La mera mera",15000);
 	Repartidor* TemporalRepartidor=new Repartidor("Juanito","23","4321","Dificil",0,1000);
+
 	do
 	{
-		mvprintw(6,111,"1. Throwing dice\n");
-		do
+		mvprintw(0, 0, "1. Empezar un nuevo juego de BlackJack \n");
+		mvprintw(1, 0, "2. Ver Dinero. \n");
+		mvprintw(2, 0, "3. Salir \n");
+		getstr(Opcion);
+		if (Opcion[0]=='1')
 		{
-			mvprintw(4,111,"1-Empezar un nuevo juego de BlackJack\n2-Ver Dinero\n3-Salir");
+			mvprintw(4, 0,"Ingrese su apuesta para este juego: \n");
+			getstr(Apuesta);
+		for (int i = 0; i < 2; ++i)
+		{
+			TemporalJugador->setMano(TemporalRepartidor->Repartir());
+			TemporalRepartidor->setMano(TemporalRepartidor->Repartir());
+		}	
+		do{
+			mvprintw(6, 0, "1. Ver Cartas\n");
+			mvprintw(7, 0, "2. Pedir Carta\n");
+			mvprintw(8, 0, "3. Mostrar Cartas\n");
+			mvprintw(9, 0, "Ingrese su opcion: \n");
 			getstr(Opcion);
-			if (Opcion[0]=='1')
-			{
-				mvprintw(5,111,"Ingrese su apuesta para este juego:");
-				getstr(Apuesta);
-			for (int i = 0; i < 2; ++i)
-			{
-				TemporalJugador->setMano(TemporalRepartidor->Repartir());
-				TemporalRepartidor->setMano(TemporalRepartidor->Repartir());
-			}	
-			do{
-				mvprintw(6,111,"1-Ver Cartas\n2-Pedir Carta\n3-Mostrar Cartas\nIngrese su opcion:");
-				getstr(Opcion);
-				cleanScreen();
-				if(Opcion[0]=='1'){
-					//mvprintw(7,111,TemporalJugador->verMano());
-					//mvprintw(8,111,TemporalRepartidor->verMano());
-				}else if(Opcion[0]=='2'){
-					TemporalJugador->setMano(TemporalRepartidor->Repartir());
-				if(TemporalRepartidor->CalcularMano(0)<=15){
-					TemporalRepartidor->setMano(TemporalRepartidor->Repartir());	
-				}
-				}else if(Opcion[0]=='3'){
-					//mvprintw(7,111,TemporalJugador->verMano());
-					//mvprintw(8,111,TemporalRepartidor->verMano());
-					int Resul1,Resul2;
-					Resul2=TemporalRepartidor->CalcularMano();
-					Resul1=TemporalJugador->CalcularMano();
-					//mvprintw(9,111,Resul1<<"\n"<<Resul2<<"\n");
-					if(Resul2<=Resul1&&Resul1<=21&&Resul2<=21){
-						mvprintw(10,111,"Felicidaddes Haz Ganado este Juego!");
-						TemporalJugador->setDinero(Apuesta[1]*2);
-					}else{
-						mvprintw(10,11,"Haz Perdido este Juego!");
-						TemporalJugador->setDinero(Apuesta[1]*-1);
-					}
-				}
-				TemporalRepartidor->setBaraja();
-		}while(Opcion[0]=='3');		
-			}else if(Opcion[0]=='2'){
-				TemporalJugador->toString();
-			} 
-	} while (Opcion[0]!='3');
-		getch();
-	} while (Opcion[0]!=1);
+			cleanScreen();
+			if(Opcion[0]=='1'){
 
+				mvprintw(10, 0, TemporalJugador->verMano().c_str());
+				mvprintw(11, 0, TemporalJugador->verMano().c_str());
+			}else if(Opcion[0]=='2'){
+
+				TemporalJugador -> setMano(TemporalRepartidor -> Repartir());
+				mvprintw(9, 0, "Algo paso. \n");
+			if(TemporalRepartidor -> CalcularMano(0) <= 15){
+				TemporalRepartidor -> setMano(TemporalRepartidor -> Repartir());	
+			}
+			}else if(Opcion[0]=='3'){
+				mvprintw(10, 0, TemporalJugador->verMano().c_str());
+				mvprintw(11, 0, TemporalJugador->verMano().c_str());
+				cleanScreen();
+				int Resul1, Resul2;
+				Resul2 = TemporalRepartidor -> CalcularMano();
+				Resul1 = TemporalJugador -> CalcularMano();
+				//mvprintw(12, 0, Resul1 << "\n" << Resul2 << "\n");
+				if(Resul2 <= Resul1 && Resul1 <= 21 && Resul2 <= 21){
+					mvprintw(10,111,"Felicidaddes Haz Ganado este Juego! \n");
+					TemporalJugador -> setDinero(Apuesta[1] * 2);
+				}else{
+					mvprintw(10,11,"Haz Perdido este Juego! \n");
+					TemporalJugador -> setDinero(Apuesta[1] * -1);
+				}
+			}
+			TemporalRepartidor -> setBaraja();
+	} while(Opcion[0]=='3');		
+		} else if(Opcion[0]=='2'){
+			TemporalJugador->toString();
+		}
+	} while (Opcion[0]!='3');
+	getch();
 	endwin();
 }
 
