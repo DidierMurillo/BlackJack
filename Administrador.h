@@ -11,7 +11,7 @@ private:
 	string Sueldo;
 
 public:
-	Administrador(string,string,string,string,string,string);
+	Administrador(string,string,string,string,string);
 	~Administrador();
 	void setRangoAdministrador(string);
 	void setExperienciaLaboral(string);

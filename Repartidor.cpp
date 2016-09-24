@@ -9,8 +9,7 @@ using namespace std;
 #include <sstream>
 using std::stringstream;
 
-Repartidor::Repartidor(string Nombre,string Edad,string ID,string Dificultad,int ConteoJuegos,int MontoMaximo):Persona(Nombre,Edad,ID),Dificultad(Dificultad)
-,ConteoJuegos(ConteoJuegos),MontoMaximo(MontoMaximo){
+Repartidor::Repartidor(string Nombre,string Edad,string ID,string Dificultad):Persona(Nombre,Edad,ID),Dificultad(Dificultad){
 	this->BarajaTexas=new Baraja();
 }
 
@@ -32,7 +31,7 @@ void Repartidor::setMontoMaximo(int MontoMaximo){
 
 string Repartidor::toString(){
 	stringstream ss;
-	ss<<Persona::toString()<<"Dificultad:"<<Dificultad<<" Conteo de Juegos: "<<ConteoJuegos<<" Monto Maximo: "<<MontoMaximo;
+	ss<<Persona::toString()<<"Dificultad:"<<Dificultad;
 	return ss.str();
 }
 

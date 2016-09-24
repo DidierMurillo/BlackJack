@@ -20,7 +20,7 @@ private:
 	vector<Carta*> Mano;
 
 public:
-	Repartidor(string,string,string,string,int,int);
+	Repartidor(string,string,string,string);
 	~Repartidor();
 	void setConteoJuegos(int);
 	void setMontoMaximo(int);

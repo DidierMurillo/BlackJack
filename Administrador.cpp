@@ -6,8 +6,8 @@ using std::string;
 using std::stringstream;
 
 
-Administrador::Administrador(string Nombre,string Edad,string ID,string RangoAdministrador,string ExperienciaLaboral,string Sueldo):
-Persona(Nombre,Edad,ID),RangoAdministrador(RangoAdministrador),ExperienciaLaboral(ExperienciaLaboral),Sueldo(Sueldo){
+Administrador::Administrador(string Nombre,string Edad,string ID,string RangoAdministrador,string Sueldo):
+Persona(Nombre,Edad,ID),RangoAdministrador(RangoAdministrador),Sueldo(Sueldo){
 
 }
 
