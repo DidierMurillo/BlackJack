@@ -27,15 +27,15 @@ string Carta::getColor(){
 string Carta::toString(){
 	stringstream ss;
 	if(Numero==75){
-		ss<<Simbolo<<"  "<<'J'<<" ";	
+		ss<<1<<"  "<<'J'<<" ";	
 	}else if(Numero==81){
-		ss<<Simbolo<<"  "<<'Q'<<" ";
+		ss<<2<<"  "<<'Q'<<" ";
 	}else if(Numero==65){
-		ss<<Simbolo<<"  "<<'A'<<" ";
+		ss<<3<<"  "<<'A'<<" ";
 	}else if(Numero==74){
-		ss<<Simbolo<<"  "<<'K'<<" ";
+		ss<<4<<"  "<<'K'<<" ";
 	}else{
-		ss<<Simbolo<<"  "<<Numero<<" ";
+		ss<<5<<"  "<<Numero<<" ";
 	}
 	
 	return ss.str();

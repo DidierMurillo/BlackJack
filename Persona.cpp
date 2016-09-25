@@ -25,9 +25,9 @@ void Persona::setID(string ID){
 	this->ID=ID;
 }
 
-string Persona::toString(){
+string Persona::toString() {
  	stringstream ss;
- 	ss<<"Nombre:"<<Nombre<<" Edad:"<<Edad<<" ID:"<<ID;
+ 	ss<<"Nombre: " <<Nombre << "\nEdad: " << Edad << "\nID: "<<ID << "\n";
  	return ss.str();
 }
 

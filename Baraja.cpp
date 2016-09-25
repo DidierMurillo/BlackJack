@@ -62,13 +62,8 @@ Carta* Baraja::getCarta(){
 	int Temporal,Random;
 	time_t t;
     srand((unsigned) time(&t));
-    Random=(1 + rand() % 2);
-    if(Random==1){
-    	Temporal=(1+rand()%26);
-    }else{
-    	Temporal=(25 + rand() % 26);
-    }
-	this->baraja.erase(this->baraja.begin()+Temporal);
+    Temporal=(rand()%52);
+    this->baraja.erase(this->baraja.begin()+Temporal);
 	return this->baraja.at(Temporal);
 }
 
