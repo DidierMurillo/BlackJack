@@ -150,7 +150,7 @@ int main(){
 								}
 							}else if(Opcion2[0]=='2') {
 								TemporalJugador -> setMano(TemporalRepartidor -> Repartir());
-								mvprintw(13, 0, "Se repartieron cartas. ,\n");
+								mvprintw(13, 0, "Se repartieron cartas.\n");
 								/*if(TemporalRepartidor -> CalcularMano(0) <= 15){
 									TemporalRepartidor -> setMano(TemporalRepartidor -> Repartir());	
 								}*/
