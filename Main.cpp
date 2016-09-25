@@ -120,7 +120,7 @@ int main(){
 					{
 						mvprintw(0, 0, "1. Empezar un nuevo juego de BlackJack \n");
 						mvprintw(1, 0, "2. Ver Dinero. \n");
-						mvprintw(2, 0, "3. Salir \n");
+						mvprintw(2, 0, "4. Salir \n");
 						getstr(Opcion);
 						if (Opcion[0]=='1')
 						{
@@ -164,11 +164,13 @@ int main(){
 								}
 							}
 							TemporalRepartidor -> setBaraja();
-					} while(Opcion[0]=='3');		
+					} while(Opcion[0]!='3');	
+						cleanScreen();	
 						} else if(Opcion[0]=='2'){
 							TemporalJugador->toString();
 						}
-					} while (Opcion[0]!='3');
+					} while (Opcion[0]!='4');
+					cleanScreen();
 				}
 			}	
 		}	
