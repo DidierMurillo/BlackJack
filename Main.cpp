@@ -38,7 +38,7 @@ int main(){
 	
 	mvprintw(0, 0, "Ingrese su Nombre:\n");
 	getstr(Nombre);
-	//cleanScreen();
+	cleanScreen();
 	mvprintw(1, 0, "Ingrese su ID:""\n");
 	getstr(ID);
 	for (int i = 0; i < ListaPersonas.size(); ++i)
@@ -55,7 +55,7 @@ int main(){
 					mvprintw(3, 0, "3. Agregar un Repartidor \n");	
 					mvprintw(4, 0, "4. Salir \n");
 					getstr(Opcion);
-					//cleanScreen();
+					cleanScreen();
 					if (Opcion[0]=='1')
 					{
 						mvprintw(0, 0, "Ingrese el Nombre del nuevo Administrador:");
@@ -139,7 +139,7 @@ int main(){
 							mvprintw(9, 0, "4. Rendirse \n");
 							mvprintw(10, 0, "Ingrese su opcion: \n");
 							getstr(Opcion);
-							//cleanScreen();
+							cleanScreen();
 							if(Opcion[0]=='1'){
 								if (TemporalJugador -> getHandSize() == 0)
 								{
@@ -174,7 +174,7 @@ int main(){
 					} else if(Opcion[0] == '2') {
 						string playerData = TemporalJugador -> toString();
 						mvprintw(15, 0, playerData.c_str());
-						//cleanScreen();
+						cleanScreen();
 					}
 				} while (Opcion[0]!='3');
 			}
