@@ -30,6 +30,7 @@ int main(){
 	char Lugar[20],Dificultad[20],Rango[20],Sueldo[10],Apodo[20];
 	char ID[4];
 	char Dinero[5];
+	int ContadorCerdo;
 	vector<Persona*> ListaPersonas;
 	Jugador* TemporalJugador=new Jugador("Juana","18","1234","Mexico","La mera mera",15000);
 	Repartidor* TemporalRepartidor=new Repartidor("Juanito","23","4321","Dificil");
@@ -122,6 +123,7 @@ int main(){
 					mvprintw(0, 0, "1. Empezar un nuevo juego de BlackJack \n");
 					mvprintw(1, 0, "2. Ver Dinero. \n");
 					mvprintw(2, 0, "3. Salir \n");
+					ContadorCerdo=1;
 					getstr(Opcion);
 					if (Opcion[0]=='1')
 					{
@@ -152,12 +154,13 @@ int main(){
 								/*if(TemporalRepartidor -> CalcularMano(0) <= 15){
 									TemporalRepartidor -> setMano(TemporalRepartidor -> Repartir());	
 								}*/
+								ContadorCerdo++;
 							}else if(Opcion2[0]=='3'){
 								mvprintw(10, 0, TemporalJugador -> verMano().c_str());
 								mvprintw(11, 0, TemporalRepartidor -> verMano().c_str());
 								int Resul1, Resul2;
 								Resul2 = TemporalRepartidor -> CalcularMano();
-								Resul1 = TemporalJugador -> CalcularMano();
+								Resul1 = TemporalJugador -> CalcularMano(ContadorCerdo);
 								//mvprintw(12, 0, Resul1 << "\n" << Resul2 << "\n");
 								if(Resul2 <= Resul1 && Resul1 <= 21 && Resul2 <= 21){
 									mvprintw(13,00,"Felicidades, ha ganado este juego! \n");

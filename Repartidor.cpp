@@ -68,7 +68,7 @@ int Repartidor::CalcularMano(){
 		Total+=Temporal;
 		
 	}
-	for (int i = 0; i <this->Mano.size()+3 ; ++i)
+	for (int i = 0; i <this->Mano.size()+1 ; ++i)
 	{
 		Mano.pop_back();
 	}

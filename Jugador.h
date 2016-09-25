@@ -24,6 +24,6 @@ public:
 	void setDinero(int);
 	string toString();
 	void setMano(Carta*);
-	int CalcularMano();
+	int CalcularMano(int);
 	string verMano();
 };

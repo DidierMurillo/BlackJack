@@ -52,7 +52,7 @@ string Jugador::verMano(){
 	return ss.str();
 }
 
-int Jugador::CalcularMano(){
+int Jugador::CalcularMano(int Cont){
 	int Total=0,Temporal=0;
 	for (int i = 0; i < this->Mano.size(); ++i)
 	{
@@ -70,7 +70,7 @@ int Jugador::CalcularMano(){
 		}
 		Total+=Temporal;
 	}
-	for (int i = 0; i <this->Mano.size()+3 ; ++i)
+	for (int i = 0; i <this->Mano.size()+Cont; ++i)
 	{
 		Mano.pop_back();
 	}
