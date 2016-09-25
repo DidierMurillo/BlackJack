@@ -17,6 +17,7 @@ private:
 public:
 	Jugador(string,string,string,string,string,int);
 	~Jugador();
+	int getHandSize();
 	void setCartas(Carta*);
 	void setLugar(string);
 	void setApodo(string);

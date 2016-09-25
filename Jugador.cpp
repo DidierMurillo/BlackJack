@@ -30,8 +30,12 @@ void Jugador::setDinero(int Dinero){
 
 string Jugador::toString(){
 	stringstream ss;
-	ss<<Persona::toString()<<"Lugar: "<<Lugar<<" Apodo:"<<Apodo<<" Total Dinero:"<<Dinero;
+	ss<<Persona::toString()<<"Origina: " << Lugar << "\nApodo: " << Apodo << "\nTotal Dinero: " << Dinero;
 	return ss.str();
+}
+
+int Jugador::getHandSize() {
+	return this -> Mano.size();
 }
 
 void Jugador::setMano(Carta* C){
