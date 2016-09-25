@@ -16,4 +16,5 @@ public:
 	int getNumero();
 	string getSimbolo();
 	string getColor();
+	string getNumeroString();
 };

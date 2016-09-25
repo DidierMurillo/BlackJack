@@ -17,7 +17,7 @@ void crearMapaEspada(char ,int);
 void crearMapaDiamante(char ,int);
 void crearMapaTrebol(char ,int);
 void imprimirCarta(int, char, char[20][27] = NULL);
-
+void drawCards(string, string, int, int);
 void cleanScreen();
 int main(){
 
@@ -127,6 +127,7 @@ int main(){
 					getstr(Opcion);
 					if (Opcion[0]=='1')
 					{
+						cleanScreen();
 						for (int i = 0; i < 2; ++i)
 						{
 							TemporalJugador->setMano(TemporalRepartidor->Repartir());
@@ -141,12 +142,17 @@ int main(){
 							getstr(Opcion2);
 							cleanScreen();
 							if(Opcion2[0]=='1'){
+								int y = 1;
 								if (TemporalJugador -> getHandSize() == 0)
 								{
 									cout << "Pida cartas primero! \n";
 								} else {
-									mvprintw(10, 0, TemporalJugador -> verMano().c_str());
-									mvprintw(11, 0, TemporalJugador -> verMano().c_str());
+
+									for (int i = 0; i < TemporalJugador->getHandSize(); ++i)
+									{
+										drawCards(TemporalJugador->getCarta(i)->toString(), TemporalJugador->getCarta(i)->getSimbolo(),12, y+(i*23));
+									}
+									
 								}
 							}else if(Opcion2[0]=='2') {
 								TemporalJugador -> setMano(TemporalRepartidor -> Repartir());
@@ -156,17 +162,26 @@ int main(){
 								}*/
 								ContadorCerdo++;
 							}else if(Opcion2[0]=='3'){
-								mvprintw(10, 0, TemporalJugador -> verMano().c_str());
-								mvprintw(11, 0, TemporalRepartidor -> verMano().c_str());
+								int y = 5;
+								mvprintw(11, 1, "Cartas jugador:\n");
+								mvprintw(26, 1, "Cartas Repartidor:\n");
+								for (int i = 0; i < TemporalJugador->getHandSize(); ++i)
+									{
+										drawCards(TemporalJugador->getCarta(i)->toString(), TemporalJugador->getCarta(i)->getSimbolo(),12, y+(i*23));
+									}
+								for (int i = 0; i < TemporalRepartidor->getHandSize(); ++i)
+								{
+									drawCards(TemporalRepartidor->getCarta(i)->toString(), TemporalJugador->getCarta(i)->getSimbolo(),27, y+(i*23));
+								}
 								int Resul1, Resul2;
 								Resul2 = TemporalRepartidor -> CalcularMano();
 								Resul1 = TemporalJugador -> CalcularMano(ContadorCerdo);
 								//mvprintw(12, 0, Resul1 << "\n" << Resul2 << "\n");
 								if(Resul2 <= Resul1 && Resul1 <= 21 && Resul2 <= 21){
-									mvprintw(13,00,"Felicidades, ha ganado este juego! \n");
+									mvprintw(11,17,"Felicidades, ha ganado este juego! \n");
 									TemporalJugador -> setDinero((double)Apuesta[1] * 2);
 								}else{
-									mvprintw(13,00,"Ha perdido este juego! \n");
+									mvprintw(11,17,"Ha perdido este juego! \n");
 									TemporalJugador -> setDinero((double)Apuesta[1] * -1);
 								}
 							}
@@ -196,150 +211,79 @@ void cleanScreen(){
 	}
 }
 
-void crearMapaCorazon(char numeroCarta, int posicion){
-	char corazon[20][27] = {
-		"--------------------------",
-		"-|     |----------|     |-",
-		"-|  N  |----------|  N  |-",
-		"-|     |----------|     |-",	
-		"--------------------------",
-		"----       ---      ------",
-		"---         -         ----",
-		"--                     ---",
-		"--         ---        ----",
-		"---       | N |      -----",
-		"----       ---      ------",
-		"-----              -------",
-		"------            --------",
-		"-------          ---------",
-		"--------        ----------",
-		"---------      -----------",
-		"-|     |--    ----|     |-",
-		"-|  N  |---  -----|  N  |-",
-		"-|     |----------|     |-",
-		"--------------------------"
-	};
-	attrset (COLOR_PAIR(1));
-	imprimirCarta(posicion, numeroCarta, corazon);
-}
-void crearMapaEspada(char numeroCarta, int posicion){
-	char palo[20][27] = {
-		"**************************",
-		"*     *------------*     *",
-		"*  N  *------------*  N  *",
-		"*     *---     ----*     *",
-		"*******--       ---*******",
-		"*-------         --------*",
-		"*------           -------*",
-		"*-----             ------*",
-		"*----      ===      -----*",
-		"*---      | N |      ----*",
-		"*--        ===        ---*",
-		"*-      --     --      --*",
-		"*-     ----  ----      --*",
-		"*---------    -----------*",	
-		"*--------      ----------*",
-		"*******------------*******",
-		"*     *------------*     *",
-		"*  N  *------------*  N  *",
-		"*     *------------*     *",
-		"**************************"
-		// "-------------------------"
-	};
-	attrset (COLOR_PAIR(2));
-	imprimirCarta(posicion, numeroCarta, palo);
-}
-void crearMapaTrebol(char numeroCarta, int posicion){
-	char palo[20][27] = {
-		"**************************",
-		"*     *------------*     *",
-		"*  N  *------------*  N  *",
-		"*     *-          -*     *",
-		"*******            *******",
-		"*------           -------*",
-		"*-------         --------*",
-		"*---------      ---------*",
-		"*---        ===       ---*",
-		"*--        | N |       --*",
-		"*--        -===-       --*",
-		"*---     --    --     ---*",
-		"*---------      ---------*",
-		"*--------        --------*",	
-		"*-------          -------*",
-		"*******------------*******",
-		"*     *------------*     *",
-		"*  N  *------------*  N  *",
-		"*     *------------*     *",
-		"**************************"
-		// "-------------------------"
-	};
-	attrset (COLOR_PAIR(2));
-	imprimirCarta(posicion, numeroCarta, palo);
-}
-void crearMapaDiamante(char numeroCarta, int posicion){
-	char diamante[20][27] = {
-		"**************************",
-		"*     *------------*     *",
-		"*  N  *----   -----*  N  *",
-		"*     *---     ----*     *",
-		"*******--       ---*******",
-		"*-------         --------*",
-		"*------           -------*",
-		"*-----      ===    ------*",
-		"*-----     | N |    -----*",
-		"*------     ===    ------*",
-		"*-------          -------*",
-		"*--------        --------*",
-		"*---------      ---------*",
-		"*----------    ----------*",	
-		"*-----------  -----------*",
-		"*******------------*******",
-		"*     *------------*     *",
-		"*  N  *------------*  N  *",
-		"*     *------------*     *",
-		"**************************"
-		// "-------------------------"
-	};
-	attrset (COLOR_PAIR(1));
-	imprimirCarta(posicion, numeroCarta, diamante);
-}
 
-void imprimirCarta(int posicion, char numeroCarta, char mapa[20][27]){
-	for(int i = 0; i < 20; i++){
-		for(int j = 0; j < 27; j++){
-			if((i == 0 || i == 4) && j < 26){
-				move(i + 8,j + 15 + (27 * posicion));
-				printw("-");
-			}
-			if((j == 0 || j == 25) && (i >0 && i < 4)){
-				move(i + 8,j + 15 + (27 * posicion));
-				printw("|");	
-			}
-			if(i == 2 && j == 12){
-				move(i + 8,j + 15 + (27 * posicion));
-				printw("%d", posicion + 1);					
-			}
-			move(i + 13,j + 15 + (27 * posicion));
-			if(mapa == NULL){
-				if(j % 2 == 0){
-					printw("|");
-				}else{
-					printw("-");
-				}
-			}else{
-				if(mapa[i][j] == 'N'){
-					if(numeroCarta == 'D'){
-						move(i + 13,j + 14 + (27 * posicion));
-						// j++;
-						printw("10");
-					}else{
-						printw("%c", numeroCarta);
-					}
-				}else{
-					printw("%c", mapa[i][j]);
-				}
-			}
-		}
-		// printw(" | ");
-	}
+void drawCards(string numero, string simbolo, int posisionx, int posisiony){
+	
+	init_pair(1,COLOR_RED,COLOR_WHITE);
+	init_pair(2,COLOR_BLACK,COLOR_WHITE);
+	    
+    if (simbolo == "♥"){
+    	attron(COLOR_PAIR(1));
+    	mvprintw(posisionx,posisiony,  "**********************\n");
+    	mvprintw(posisionx+1,posisiony,"**********************\n");
+    	mvprintw(posisionx+2,posisiony,"*****    ***    ******\n");
+    	mvprintw(posisionx+3,posisiony,"****      *       ****\n");
+    	mvprintw(posisionx+4,posisiony,"***                ***\n");
+    	mvprintw(posisionx+5,posisiony,"***      ***      ****\n");
+    	mvprintw(posisionx+6,posisiony,numero.c_str());
+    	mvprintw(posisionx+7,posisiony,"*****    ***    ******\n");
+    	mvprintw(posisionx+8,posisiony,"******         *******\n");
+    	mvprintw(posisionx+9,posisiony,"*******       ********\n");
+    	mvprintw(posisionx+10,posisiony,"********     *********\n");
+    	mvprintw(posisionx+11,posisiony,"*********   **********\n");
+    	mvprintw(posisionx+12,posisiony,"********** ***********\n");
+    	mvprintw(posisionx+13,posisiony,"**********************\n");
+    	attroff(COLOR_PAIR(1));
+    }else if (simbolo == "♠"){
+    	attron(COLOR_PAIR(2));
+    	mvprintw(posisionx,posisiony,  "**********************\n");
+    	mvprintw(posisionx+1,posisiony, "**********************\n");
+    	mvprintw(posisionx+2,posisiony, "*********    *********\n");
+    	mvprintw(posisionx+3,posisiony, "********      ********\n");
+    	mvprintw(posisionx+4,posisiony, "*******        *******\n");
+    	mvprintw(posisionx+5,posisiony, "******          ******\n");
+    	mvprintw(posisionx+6,posisiony, "*****    ===     *****\n");
+    	mvprintw(posisionx+7,posisiony, numero.c_str());
+    	mvprintw(posisionx+8,posisiony, "***      ===       ***\n");
+    	mvprintw(posisionx+9,posisiony, "**     **    **     **\n");
+    	mvprintw(posisionx+10,posisiony,"**    **** ****     **\n");
+    	mvprintw(posisionx+11,posisiony,"*********   **********\n");
+    	mvprintw(posisionx+12,posisiony,"********     *********\n");
+    	mvprintw(posisionx+13,posisiony,"**********************\n");
+    	attroff(COLOR_PAIR(2));
+    }else if (simbolo == "♣"){
+    	attron(COLOR_PAIR(2));
+    	mvprintw(posisionx,posisiony,   "**********************\n");
+    	mvprintw(posisionx+1,posisiony, "**********************\n");
+    	mvprintw(posisionx+2,posisiony, "*******       ********\n");
+    	mvprintw(posisionx+3,posisiony, "******         *******\n");
+    	mvprintw(posisionx+4,posisiony, "*******       ********\n");
+    	mvprintw(posisionx+5,posisiony, "********     *********\n");
+    	mvprintw(posisionx+6,posisiony, "***      ===      ****\n");
+    	mvprintw(posisionx+7,posisiony, numero.c_str());
+    	mvprintw(posisionx+8,posisiony, "**      *===*      ***\n");
+    	mvprintw(posisionx+9,posisiony, "***   **    **    ****\n");
+    	mvprintw(posisionx+10,posisiony,"*******      *********\n");
+    	mvprintw(posisionx+11,posisiony,"******        ********\n");
+    	mvprintw(posisionx+12,posisiony,"**********************\n");
+    	mvprintw(posisionx+13,posisiony,"**********************\n");
+    	attroff(COLOR_PAIR(2));
+    } else if (simbolo == "♦"){
+    	attron(COLOR_PAIR(1));
+    	mvprintw(posisionx,posisiony,   "**********************\n");
+    	mvprintw(posisionx+1,posisiony, "**********************\n");
+    	mvprintw(posisionx+2,posisiony, "**********   *********\n");
+    	mvprintw(posisionx+3,posisiony, "*********     ********\n");
+    	mvprintw(posisionx+4,posisiony, "********       *******\n");
+    	mvprintw(posisionx+5,posisiony, "*******         ******\n");
+    	mvprintw(posisionx+6,posisiony, "******    ===    *****\n");
+    	mvprintw(posisionx+7,posisiony, numero.c_str());
+    	mvprintw(posisionx+8,posisiony, "******    ===    *****\n");
+    	mvprintw(posisionx+9,posisiony, "*******         ******\n");
+    	mvprintw(posisionx+10,posisiony,"********       *******\n");
+    	mvprintw(posisionx+11,posisiony,"*********     ********\n");
+    	mvprintw(posisionx+12,posisiony,"**********   *********\n");
+    	mvprintw(posisionx+13,posisiony,"**********************\n");
+    	attroff(COLOR_PAIR(1));
+    }
 }

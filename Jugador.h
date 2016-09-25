@@ -26,4 +26,5 @@ public:
 	void setMano(Carta*);
 	int CalcularMano(int);
 	string verMano();
+	Carta* getCarta(int);
 };

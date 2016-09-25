@@ -32,4 +32,6 @@ public:
 	string verMano();
 	Carta* Repartir();
 	void setBaraja();
+	Carta* getCarta(int);
+	int getHandSize();
 };

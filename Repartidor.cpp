@@ -108,3 +108,11 @@ Carta* Repartidor::Repartir(){
 void Repartidor::setBaraja(){
 	this->BarajaTexas=new Baraja();
 }
+
+Carta* Repartidor::getCarta(int posision){
+	return this->Mano.at(posision);
+}
+
+int Repartidor::getHandSize() {
+	return this -> Mano.size();
+}

@@ -77,3 +77,7 @@ int Jugador::CalcularMano(int Cont){
 	return Total;
 
 }
+
+Carta* Jugador::getCarta(int posision){
+	return this->Mano.at(posision);
+}
