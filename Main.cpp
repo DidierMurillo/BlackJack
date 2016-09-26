@@ -162,7 +162,7 @@ int main(){
 								}*/
 								ContadorCerdo++;
 							}else if(Opcion2[0]=='3'){
-								int y = 5;
+								int y = 1;
 								mvprintw(11, 1, "Cartas jugador:\n");
 								mvprintw(26, 1, "Cartas Repartidor:\n");
 								for (int i = 0; i < TemporalJugador->getHandSize(); ++i)
